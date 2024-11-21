@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Book, Author, BookInstance, Genre
 # Create your views here.
+from django.views import generic
 
 def index(request):
     """
@@ -19,3 +20,23 @@ def index(request):
         'index.html',
         context={'num_books':num_books,'num_instances':num_instances,'num_instances_available':num_instances_available,'num_authors':num_authors},
     )
+
+class BookListView(generic.ListView):
+    model = Book
+    template_name = 'book_list.html'  # Убедитесь, что шаблон существует
+    context_object_name = 'book_list'  # Используемое имя для списка книг в шаблоне
+
+class BookDetailView(generic.DetailView):
+    model = Book
+    template_name = 'book_detail.html'  # Убедитесь, что шаблон существует
+    context_object_name = 'book'  # Имя переменной, которая будет передана в шаблон
+
+class AuthorListView(generic.ListView):
+    model = Author
+    template_name = 'author_list.html'  # Шаблон для отображения списка авторов
+    context_object_name = 'author_list'  # Имя переменной, которая будет использоваться в шаблоне
+
+class AuthorDetailView(generic.DetailView):
+    model = Author
+    template_name = 'author_detail.html'  # Шаблон для отображения информации об авторе
+    context_object_name = 'author'  # Имя переменной, которая будет использоваться в шаблоне
