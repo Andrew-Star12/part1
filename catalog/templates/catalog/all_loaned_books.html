@@ -1,28 +1,42 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-<h1>All Loaned Books</h1>
+<div class="container">
+  <h1 class="display-4 text-center my-4">All Loaned Books</h1>
 
-{% if bookinstances %}
-<ul>
-    {% for bookinst in bookinstances %}
-    <li>
-        <a href="{% url 'book-detail' bookinst.book.pk %}">{{ bookinst.book.title }}</a>
-        (Due back: {{ bookinst.due_back }})
-        - Borrower:
-        {% if bookinst.borrower %}
-        {{ bookinst.borrower.get_full_name|default:bookinst.borrower.username }}
-        {% else %}
-        No borrower
-        {% endif %}
-        <!-- Если пользователь библиотекарь, показываем ссылку для обновления книги -->
-        {% if is_librarian %}
-            <a href="{% url 'renew-book-librarian' bookinst.pk %}">Renew</a>
-        {% endif %}
-    </li>
-    {% endfor %}
-</ul>
-{% else %}
-<p>No books are currently on loan.</p>
-{% endif %}
+  {% if bookinstances %}
+  <div class="row">
+    <div class="col-md-12">
+      <ul class="list-group">
+        {% for bookinst in bookinstances %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <div>
+            <a href="{% url 'book-detail' bookinst.book.pk %}" class="text-primary font-weight-bold">
+              {{ bookinst.book.title }}
+            </a>
+            <p class="text-muted">Due back: {{ bookinst.due_back }}</p>
+            <p class="font-italic">
+              Borrower:
+              {% if bookinst.borrower %}
+                {{ bookinst.borrower.get_full_name|default:bookinst.borrower.username }}
+              {% else %}
+                No borrower
+              {% endif %}
+            </p>
+          </div>
+
+          {% if is_librarian %}
+          <div>
+            <a href="{% url 'renew-book-librarian' bookinst.pk %}" class="btn btn-warning btn-sm">Renew</a>
+          </div>
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  {% else %}
+  <p class="text-center text-muted">No books are currently on loan.</p>
+  {% endif %}
+</div>
 {% endblock %}

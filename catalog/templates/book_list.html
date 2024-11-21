@@ -1,41 +1,48 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-<h1>Book List</h1>
+<div class="container">
+  <h1 class="display-4 text-center my-4">Book List</h1>
 
-{% if is_librarian %}
-    <a href="{% url 'book-create' %}" class="btn btn-primary">Add a New Book</a>
-<br>
-{% endif %}
-<br>
-{% if book_list %}
-<ul>
-    {% for book in book_list %}
-    <li>
-        <a href="{{ book.get_absolute_url }}">{{ book.title }}</a> ({{ book.author }})
-        | Genres: {{ book.display_genre }}
-    </li>
-    {% endfor %}
-</ul>
+  {% if is_librarian %}
+  <div class="mb-3">
+    <a href="{% url 'book-create' %}" class="btn btn-success">Add a New Book</a>
+  </div>
+  {% endif %}
 
-{% block pagination %}
-{% if is_paginated %}
-<div class="pagination">
-      <span class="page-links">
-        {% if page_obj.has_previous %}
-          <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">previous</a>
-        {% endif %}
-        <span class="page-current">
-          Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-        </span>
-        {% if page_obj.has_next %}
-          <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">next</a>
-        {% endif %}
-      </span>
+  {% if book_list %}
+  <div class="row">
+    <div class="col-12">
+      <ul class="list-group">
+        {% for book in book_list %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <a href="{{ book.get_absolute_url }}" class="book-title">{{ book.title }}</a>
+          <span class="text-muted">({{ book.author }})</span>
+          <span class="badge badge-info">{{ book.display_genre }}</span>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  {% block pagination %}
+  {% if is_paginated %}
+  <div class="pagination justify-content-center mt-4">
+    <span class="page-links">
+      {% if page_obj.has_previous %}
+        <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}" class="btn btn-link">Previous</a>
+      {% endif %}
+      <span class="current-page mx-2">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+      {% if page_obj.has_next %}
+        <a href="{{ request.path }}?page={{ page_obj.next_page_number }}" class="btn btn-link">Next</a>
+      {% endif %}
+    </span>
+  </div>
+  {% endif %}
+  {% endblock %}
+
+  {% else %}
+  <p class="text-center">There are no books in the library.</p>
+  {% endif %}
 </div>
-{% endif %}
-{% endblock %}
-{% else %}
-<p>There are no books in the library.</p>
-{% endif %}
 {% endblock %}

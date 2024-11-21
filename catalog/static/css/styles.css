@@ -3,3 +3,470 @@
   padding: 0;
   list-style: none;
 }
+
+/* Основной фон страницы */
+body {
+  background-color: #f8f9fa;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Боковая панель */
+.sidebar-nav {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.sidebar-nav .nav-item {
+  padding: 10px 0;
+}
+
+.sidebar-nav .nav-link {
+  color: #333;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.sidebar-nav .nav-link:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+/* Заголовок страницы */
+h1, h2 {
+  font-family: 'Georgia', serif;
+}
+
+/* Кнопка logout */
+.btn-danger {
+  background-color: #dc3545;
+  border: none;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+body {
+  background-color: #f4f6f9;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Заголовок */
+h1 {
+  font-family: 'Georgia', serif;
+  color: #343a40;
+  font-weight: 600;
+}
+
+h2 {
+  font-family: 'Arial', sans-serif;
+  color: #007bff;
+  font-weight: 500;
+}
+
+/* Текст */
+p {
+  font-size: 18px;
+  color: #555;
+}
+
+/* Лист с статистикой */
+.list-group-item {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  font-size: 16px;
+}
+
+.list-group-item:hover {
+  background-color: #f1f1f1;
+}
+
+.list-group-item strong {
+  color: #343a40;
+}
+
+/* Стили для контейнера */
+.container {
+  max-width: 1200px;
+  margin-top: 50px;
+}
+
+/* Центрирование текста */
+.text-center {
+  text-align: center;
+}
+
+/* Выравнивание для колонок */
+.col-md-6 {
+  padding: 20px;
+}
+
+/* Блок с информацией о посещениях */
+h2 {
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+body {
+  background-color: #f8f9fa;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Заголовки */
+h1 {
+  color: #343a40;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* Кнопка "Add a New Book" */
+.btn-success {
+  background-color: #28a745;
+  border: none;
+  color: white;
+  font-weight: 500;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+}
+
+/* Стили для списка книг */
+.list-group-item {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+  padding: 15px;
+  font-size: 18px;
+}
+
+.book-title {
+  font-weight: bold;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.book-title:hover {
+  text-decoration: underline;
+}
+
+.text-muted {
+  font-style: italic;
+}
+
+.badge-info {
+  background-color: #17a2b8;
+}
+
+/* Стили пагинации */
+.pagination {
+  font-size: 16px;
+}
+
+.pagination .btn-link {
+  color: #007bff;
+}
+
+.pagination .current-page {
+  font-weight: bold;
+}
+
+/* Адаптивность */
+@media (max-width: 767px) {
+  .list-group-item {
+    font-size: 16px;
+  }
+
+  .pagination {
+    font-size: 14px;
+  }
+}
+body {
+  background-color: #f4f6f9;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Заголовок книги */
+h1 {
+  color: #343a40;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Стили для текста */
+p {
+  font-size: 18px;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* Кнопки действия */
+.btn-warning {
+  background-color: #ffc107;
+  border: none;
+  color: white;
+}
+
+.btn-warning:hover {
+  background-color: #e0a800;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  border: none;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+/* Стили для жанров */
+.badge-info {
+  background-color: #17a2b8;
+  font-size: 16px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+/* Стиль для карточек копий */
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.card-body {
+  padding: 20px;
+  background-color: #fff;
+}
+
+.card-text {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.card-text.text-success {
+  color: #28a745;
+}
+
+.card-text.text-danger {
+  color: #dc3545;
+}
+
+.card-text.text-warning {
+  color: #ffc107;
+}
+
+.card-body p {
+  margin-bottom: 10px;
+}
+
+/* Стили для информации о копиях */
+h4 {
+  color: #343a40;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.text-muted {
+  color: #6c757d;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Адаптивность */
+@media (max-width: 767px) {
+  .card-body {
+    padding: 15px;
+  }
+  .row {
+    flex-direction: column;
+  }
+  .col-md-6 {
+    margin-bottom: 20px;
+  }
+}
+
+h1 {
+  color: #343a40;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+/* Кнопка для создания нового автора */
+.btn-success {
+  background-color: #28a745;
+  border: none;
+  color: white;
+  font-weight: 500;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+}
+
+/* Стили для списка авторов */
+.list-group-item {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+  padding: 15px;
+  font-size: 18px;
+}
+
+.list-group-item a {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
+}
+
+.list-group-item a:hover {
+  text-decoration: underline;
+}
+
+.text-primary {
+  color: #007bff;
+}
+
+/* Текст для отсутствующих авторов */
+p.text-center {
+  color: #6c757d;
+  font-size: 18px;
+}
+
+h1 {
+  color: #343a40;
+  font-weight: bold;
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+/* Заголовок для списка книг */
+h2 {
+  color: #343a40;
+  font-weight: 600;
+  margin-top: 30px;
+}
+
+/* Стиль для информации о авторе */
+p {
+  font-size: 18px;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* Кнопки редактирования и удаления */
+.btn-warning {
+  background-color: #ffc107;
+  border: none;
+  color: white;
+}
+
+.btn-warning:hover {
+  background-color: #e0a800;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  border: none;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+/* Стили для списка книг */
+.list-group-item {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+  padding: 15px;
+  font-size: 18px;
+}
+
+.list-group-item a {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
+}
+
+.list-group-item a:hover {
+  text-decoration: underline;
+}
+
+/* Текст для отсутствующих книг */
+p.text-muted {
+  color: #6c757d;
+}
+
+/* Заголовок страницы */
+h1 {
+  color: #343a40;
+  font-weight: bold;
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+/* Стиль для списка книг */
+.list-group-item {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 15px;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.list-group-item a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.list-group-item a:hover {
+  text-decoration: underline;
+}
+
+.text-muted {
+  color: #6c757d;
+}
+
+.font-italic {
+  font-style: italic;
+}
+
+.font-weight-bold {
+  font-weight: 600;
+}
+
+/* Кнопка продления для библиотекаря */
+.btn-warning {
+  background-color: #ffc107;
+  color: white;
+  border: none;
+}
+
+.btn-warning:hover {
+  background-color: #e0a800;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-muted {
+  color: #6c757d;
+}
+
+
