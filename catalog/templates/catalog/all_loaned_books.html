@@ -1,6 +1,8 @@
 {% extends "base_generic.html" %}
+
 {% block content %}
 <h1>All Loaned Books</h1>
+
 {% if bookinstances %}
 <ul>
     {% for bookinst in bookinstances %}
@@ -12,6 +14,10 @@
         {{ bookinst.borrower.get_full_name|default:bookinst.borrower.username }}
         {% else %}
         No borrower
+        {% endif %}
+        <!-- Если пользователь библиотекарь, показываем ссылку для обновления книги -->
+        {% if is_librarian %}
+            <a href="{% url 'renew-book-librarian' bookinst.pk %}">Renew</a>
         {% endif %}
     </li>
     {% endfor %}

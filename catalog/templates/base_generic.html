@@ -32,6 +32,9 @@
         {% else %}
         <li><a href="{% url 'login'%}">Login</a></li>
         {% endif %}
+        {% if is_librarian %}
+        <li><a href="{% url 'all-loaned-books' %}">All Loaned Books</a></li>
+        {% endif %}
       </ul>
       {% endblock %}
     </div>
