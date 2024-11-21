@@ -7,6 +7,11 @@
     {% else %}
         <p><strong>Still alive.</strong></p>
     {% endif %}
+    {% if is_librarian %}
+    <!-- Кнопка для редактирования -->
+    <a href="{% url 'author_update' pk=object.pk %}" class="btn btn-primary">Edit Author</a>
+    <a href="{% url 'author_delete' pk=object.pk %}" class="btn btn-primary">Delete</a>
+    {% endif %}
     <h2>Books by {{ author }}</h2>
     <ul>
         {% for book in author.book_set.all %}

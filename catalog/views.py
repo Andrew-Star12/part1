@@ -30,7 +30,8 @@ def index(request):
 
     num_visits = request.session.get('num_visits', 0)
     request.session['num_visits'] = num_visits + 1
-    is_librarian = request.user.groups.filter(name='Librarians').exists()
+    is_librarian = request.user.is_authenticated and request.user.groups.filter(name='Librarians').exists()
+    authors = Author.objects.all()
     # Отрисовка HTML-шаблона index.html с данными внутри
     # переменной контекста context
     return render(
@@ -38,7 +39,7 @@ def index(request):
         'index.html',
         context={'num_books':num_books,'num_instances':num_instances,'num_instances_available':num_instances_available,
                  'num_authors':num_authors,
-                 'num_visits':num_visits, 'is_librarian': is_librarian,}
+                 'num_visits':num_visits, 'is_librarian': is_librarian, 'author_list': authors}
     )
 
 class BookListView(generic.ListView):
@@ -46,20 +47,46 @@ class BookListView(generic.ListView):
     template_name = 'book_list.html'  # Убедитесь, что шаблон существует
     context_object_name = 'book_list'  # Используемое имя для списка книг в шаблоне
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Добавляем в контекст информацию о том, является ли пользователь библиотекарем
+        context['is_librarian'] = self.request.user.groups.filter(name='Librarians').exists()
+        return context
+
 class BookDetailView(generic.DetailView):
     model = Book
     template_name = 'book_detail.html'  # Убедитесь, что шаблон существует
     context_object_name = 'book'  # Имя переменной, которая будет передана в шаблон
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Добавляем в контекст информацию о том, является ли пользователь библиотекарем
+        context['is_librarian'] = self.request.user.groups.filter(name='Librarians').exists()
+        return context
 
 class AuthorListView(generic.ListView):
     model = Author
     template_name = 'author_list.html'  # Шаблон для отображения списка авторов
     context_object_name = 'author_list'  # Имя переменной, которая будет использоваться в шаблоне
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Добавляем в контекст информацию о том, является ли пользователь библиотекарем
+        context['is_librarian'] = self.request.user.groups.filter(name='Librarians').exists()
+        return context
+
 class AuthorDetailView(generic.DetailView):
     model = Author
     template_name = 'author_detail.html'  # Шаблон для отображения информации об авторе
     context_object_name = 'author'  # Имя переменной, которая будет использоваться в шаблоне
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Добавляем в контекст информацию о том, является ли пользователь библиотекарем
+        context['is_librarian'] = self.request.user.groups.filter(name='Librarians').exists()
+        return context
+
+
 
 class LoanedBooksByUserListView(LoginRequiredMixin,generic.ListView):
     """
@@ -86,6 +113,12 @@ class AllLoanedBooksListView(LoginRequiredMixin, UserPassesTestMixin, generic.Li
     def test_func(self):
         """Проверяем, является ли пользователь библиотекарем."""
         return self.request.user.groups.filter(name='Librarians').exists()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Добавляем в контекст информацию о том, является ли пользователь библиотекарем
+        context['is_librarian'] = self.request.user.groups.filter(name='Librarians').exists()
+        return context
 
 @permission_required('catalog.can_mark_returned')
 def renew_book_librarian(request, pk):
@@ -126,7 +159,26 @@ class AuthorCreate(CreateView):
     initial={'date_of_death':'12/10/2016',}
 class AuthorUpdate(UpdateView):
     model = Author
-    fields = ['first_name','last_name','date_of_birth','date_of_death']
+    fields = ['first_name', 'last_name', 'date_of_birth', 'date_of_death']
+    template_name = 'catalog/author_form.html'
+    success_url = reverse_lazy('author-list')
 class AuthorDelete(DeleteView):
     model = Author
-    success_url = reverse_lazy('authors')
+    template_name = 'catalog/author_confirm_delete.html'
+    success_url = reverse_lazy('author-list')
+
+class BookCreate(CreateView):
+    model = Book
+    fields = '__all__'  # Все поля модели Book будут отображаться в форме
+    initial = {'isbn': '0000000000000'}  # Пример для начального значения поля (опционально)
+    template_name = 'catalog/book_form.html'
+    success_url = reverse_lazy('book_list')  # Путь, куда пользователь будет перенаправлен после успешного создания
+class BookUpdate(UpdateView):
+    model = Book
+    fields = ['title', 'author', 'summary', 'isbn', 'genre']  # Поля, которые будут доступны для редактирования
+    template_name = 'catalog/book_form.html'  # Шаблон, который будет использоваться для отображения формы
+    success_url = reverse_lazy('book_list')  # Путь, куда пользователь будет перенаправлен после успешного обновления
+class BookDelete(DeleteView):
+    model = Book
+    template_name = 'catalog/book_confirm_delete.html'  # Шаблон для подтверждения удаления
+    success_url = reverse_lazy('book_list')  # Путь, куда пользователь будет перенаправлен после успешного удаления
