@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+{% block content %}
+<div class="container">
+  <h1>Welcome to the Local Library</h1>
+  <p>Here is some content.</p>
+  <!-- Форма для выхода (POST-запрос) -->
+  {% if user.is_authenticated %}
+  <form action="url 'logout'" method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Logout</button>
+  </form>
+  {% else %}
+  <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
+  {% endif %}
+</div>
+{% endblock %}
